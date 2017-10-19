@@ -3,15 +3,52 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="254.0" prefWidth="359.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.fileattente.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.fileattente.FXMLController">
     <children>
-        <Button fx:id="bouton_validerType" disable="true" layoutX="146.0" layoutY="187.0" onAction="#handleSubmitAction" text="Valider" />
-        <Label fx:id="label_choix" layoutX="145.0" layoutY="230.0" minHeight="16" minWidth="69" />
-      <Label fx:id="label_libeleChoix" layoutX="46.0" layoutY="25.0" text="Veuillez choisir un type de file d'attente :" />
-      <RadioButton fx:id="radioButton_MM1" layoutX="139.0" layoutY="67.0" mnemonicParsing="false" onAction="#handleChoice1Action" text="M|M|1" />
-      <RadioButton fx:id="radioButton_MM1K" layoutX="139.0" layoutY="106.0" mnemonicParsing="false" onAction="#handleChoice2Action" text="M|M|1|K" />
-      <RadioButton fx:id="radioButton_MMS" layoutX="139.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleChoice3Action" text="M|M|S" />
+      <TabPane prefHeight="351.0" prefWidth="454.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Type">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                          <Button fx:id="bouton_validerType" disable="true" layoutX="188.0" layoutY="217.0" onAction="#handleSubmitAction" text="Valider" />
+                          <Label fx:id="label_choix" layoutX="193.0" layoutY="270.0" minHeight="16" minWidth="69" />
+                        <Label fx:id="label_libeleChoix" layoutX="87.0" layoutY="43.0" text="Veuillez choisir un type de file d'attente :" />
+                        <RadioButton fx:id="radioButton_MM1" layoutX="180.0" layoutY="92.0" mnemonicParsing="false" onAction="#handleChoice1Action" text="M|M|1" />
+                        <RadioButton fx:id="radioButton_MM1K" layoutX="181.0" layoutY="128.0" mnemonicParsing="false" onAction="#handleChoice2Action" text="M|M|1|K" />
+                        <RadioButton fx:id="radioButton_MMS" layoutX="180.0" layoutY="164.0" mnemonicParsing="false" onAction="#handleChoice3Action" text="M|M|S" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Paramètres">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="label_libeleParametres" layoutX="126.0" layoutY="29.0" text="Veuillez entrer les paramètres :" />
+                        <Label fx:id="label_lambda" layoutX="188.0" layoutY="70.0" text="λ :" />
+                        <TextField fx:id="textField_lambda" layoutX="227.0" layoutY="65.0" prefHeight="31.0" prefWidth="47.0" />
+                        <Label fx:id="label_mu" layoutX="187.0" layoutY="114.0" text="μ :" />
+                        <TextField fx:id="textField_mu" layoutX="227.0" layoutY="109.0" prefHeight="31.0" prefWidth="47.0" />
+                        <Label fx:id="label_K" layoutX="187.0" layoutY="161.0" text="K :" />
+                        <TextField fx:id="textField_K" layoutX="227.0" layoutY="156.0" prefHeight="31.0" prefWidth="47.0" />
+                        <Label fx:id="label_S" layoutX="187.0" layoutY="204.0" text="S :" />
+                        <TextField fx:id="textField_S" layoutX="227.0" layoutY="199.0" prefHeight="31.0" prefWidth="47.0" />
+                        <Button fx:id="bouton_validerParametres" disable="true" layoutX="195.0" layoutY="249.0" mnemonicParsing="false" text="Valider" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab disable="true" text="Résultat">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
     </children>
 </AnchorPane>
