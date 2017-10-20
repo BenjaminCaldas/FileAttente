@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>com.mycompany.fileattente.MainApp</mainClass>
+        <mainClass>com.mycompany.fileattente.view.MainApp</mainClass>
     </properties>
 
     <organization>

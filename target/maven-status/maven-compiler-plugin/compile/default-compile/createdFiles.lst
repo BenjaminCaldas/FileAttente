@@ -1,2 +1,5 @@
-com\mycompany\fileattente\MainApp.class
-com\mycompany\fileattente\FXMLController.class
+com\mycompany\fileattente\model\MM1K.class
+com\mycompany\fileattente\model\MMS.class
+com\mycompany\fileattente\view\MainApp.class
+com\mycompany\fileattente\model\MM1.class
+com\mycompany\fileattente\view\FXMLController.class
