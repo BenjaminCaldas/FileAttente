@@ -56,17 +56,17 @@ public class MMS {
         return calculateLq()/lambda;
     }
 
-    public double probaTauSupT(double t){
+    public double calculateProbaTauSupT(double t){
         return Math.exp(-mu*t)*(1+((calculateQj(0)*Math.pow((rho()*s),s))/(factorial(s)*(1-rho())))*
                 ((1-Math.exp(-mu*t*(s-1-rho()*s)))/(s-1-rho()*s)));
     }
 
-    public double probaTauSupTFile(double t){
+    public double calculateProbaTauQSupT(double t){
         if( t == 0){
             return (calculateQj(0)*Math.pow(rho()*s, s))/(factorial(s)*(1-rho()));
         }
         else {
-            return Math.exp(-s*mu*t*(1-rho()))*probaTauSupTFile(0);
+            return Math.exp(-s*mu*t*(1-rho()))*calculateProbaTauQSupT(0);
         }
     }
 

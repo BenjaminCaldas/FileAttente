@@ -60,7 +60,7 @@ public class MM1K {
         return lambda/(mu*(mu-lambda));
     }
 
-    public double probaTauSupT(double t){
+    public double calculateProbaTauSupT(double t){
         return Math.exp(-mu*(1-(lambda/mu))*t);
     }
 
