@@ -61,6 +61,15 @@ public class MMS {
                 ((1-Math.exp(-mu*t*(s-1-rho()*s)))/(s-1-rho()*s)));
     }
 
+    public double probaTauSupTFile(double t){
+        if( t == 0){
+            return (calculateQj(0)*Math.pow(rho()*s, s))/(factorial(s)*(1-rho()));
+        }
+        else {
+            return Math.exp(-s*mu*t*(1-rho()))*probaTauSupTFile(0);
+        }
+    }
+
     public double calculateQj(int j){
         if (j == 0){
             double sumElement = 0;
