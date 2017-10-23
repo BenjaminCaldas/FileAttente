@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.fileattente.view.FXMLController">
     <children>
-      <TabPane fx:id="tabPane_tabs" prefHeight="443.0" prefWidth="606.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane_tabs" prefHeight="525.0" prefWidth="606.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tab_type" text="Type">
             <content>
@@ -21,19 +21,19 @@
                            <font>
                               <Font size="18.0" />
                            </font></Button>
-                        <Label fx:id="label_libeleChoix" layoutX="142.0" layoutY="84.0" text="Veuillez choisir un type de file d'attente :">
+                        <Label fx:id="label_libeleChoix" layoutX="142.0" layoutY="64.0" text="Veuillez choisir un type de file d'attente :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <RadioButton fx:id="radioButton_MM1" layoutX="248.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleChoice1Action" text="M|M|1">
+                        <RadioButton fx:id="radioButton_MM1" layoutX="248.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleChoice1Action" text="M|M|1">
                            <font>
                               <Font size="18.0" />
                            </font></RadioButton>
-                        <RadioButton fx:id="radioButton_MM1K" layoutX="248.0" layoutY="189.0" mnemonicParsing="false" onAction="#handleChoice2Action" text="M|M|1|K">
+                        <RadioButton fx:id="radioButton_MM1K" layoutX="248.0" layoutY="175.0" mnemonicParsing="false" onAction="#handleChoice2Action" text="M|M|1|K">
                            <font>
                               <Font size="18.0" />
                            </font></RadioButton>
-                        <RadioButton fx:id="radioButton_MMS" layoutX="248.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleChoice3Action" text="M|M|S">
+                        <RadioButton fx:id="radioButton_MMS" layoutX="248.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleChoice3Action" text="M|M|S">
                            <font>
                               <Font size="18.0" />
                            </font></RadioButton>
@@ -89,6 +89,10 @@
                            <font>
                               <Font size="18.0" />
                            </font></Label>
+                        <Label fx:id="label_rhoIncorrect" layoutX="361.0" layoutY="322.0" text="ϱ doit être inférieur à 1 !" textFill="#ff3a3a" visible="false">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -120,7 +124,7 @@
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <TextField fx:id="textField_t" layoutX="196.0" layoutY="328.0" prefHeight="31.0" prefWidth="40.0">
+                        <TextField fx:id="textField_t" layoutX="189.0" layoutY="328.0" prefHeight="39.0" prefWidth="58.0">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
@@ -136,6 +140,26 @@
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Label>
+                        <Label fx:id="label_Qi" layoutX="45.0" layoutY="390.0" text="Qi = ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label  layoutX="129.0" layoutY="427.0" text="Où i = ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="textField_i" layoutX="188.0" layoutY="421.0" prefHeight="31.0" prefWidth="61.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="bouton_valideri" layoutX="264.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleValideriAction" text="Valider">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
                      </children></AnchorPane>
               </content>
             </Tab>
