@@ -75,8 +75,9 @@ public class MMS {
             double sumElement = 0;
             for (int i = 0; i < s; i++){
                 sumElement += Math.pow((rho()*s),i)/factorial(i);
+                System.out.println(i+" ; "+factorial(i));
             }
-            return 1/(sumElement+(Math.pow((rho()*s),s)/factorial(s)*(1-rho())));
+            return 1/(sumElement+(Math.pow((rho()*s),s)/(factorial(s)*(1-rho()))));
         }
         else {
             if (j < s) return (Math.pow(rho()*s,j)/factorial(j))*calculateQj(0);
