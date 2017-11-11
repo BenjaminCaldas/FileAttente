@@ -11,29 +11,33 @@
 
 <AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.fileattente.view.FXMLController">
     <children>
-      <TabPane fx:id="tabPane_tabs" prefHeight="525.0" prefWidth="606.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane_tabs" prefHeight="525.0" prefWidth="806.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tab_type" text="Type">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                          <Button fx:id="bouton_validerType" disable="true" layoutX="263.0" layoutY="292.0" onAction="#handleSubmitTypeAction" text="Valider">
+                          <Button fx:id="bouton_validerType" disable="true" layoutX="363.0" layoutY="292.0" onAction="#handleSubmitTypeAction" text="Valider">
                            <font>
                               <Font size="18.0" />
                            </font></Button>
-                        <Label fx:id="label_libeleChoix" layoutX="142.0" layoutY="64.0" text="Veuillez choisir un type de file d'attente :">
+                        <Label fx:id="label_libeleBienvenue" layoutX="342.0" layoutY="14.0" text="Bienvenue">
+                           <font>
+                              <Font size="28.0" />
+                           </font></Label>
+                        <Label fx:id="label_libeleChoix" layoutX="242.0" layoutY="64.0" text="Veuillez choisir un type de file d'attente :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <RadioButton fx:id="radioButton_MM1" layoutX="248.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleChoice1Action" text="M|M|1">
+                        <RadioButton fx:id="radioButton_MM1" layoutX="100.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleChoice1Action" text="M|M|1| (File d'attente avec serveur unique, sans limite de taille)">
                            <font>
                               <Font size="18.0" />
                            </font></RadioButton>
-                        <RadioButton fx:id="radioButton_MM1K" layoutX="248.0" layoutY="175.0" mnemonicParsing="false" onAction="#handleChoice2Action" text="M|M|1|K">
+                        <RadioButton fx:id="radioButton_MM1K" layoutX="100.0" layoutY="175.0" mnemonicParsing="false" onAction="#handleChoice2Action" text="M|M|1|K (File d'attente avec serveur unique, avec une limite de K client dans la file)">
                            <font>
                               <Font size="18.0" />
                            </font></RadioButton>
-                        <RadioButton fx:id="radioButton_MMS" layoutX="248.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleChoice3Action" text="M|M|S">
+                        <RadioButton fx:id="radioButton_MMS" layoutX="100.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleChoice3Action" text="M|M|S (File d'attente avec un nombre S de serveurs, sans limite de taille)">
                            <font>
                               <Font size="18.0" />
                            </font></RadioButton>
@@ -45,51 +49,51 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="label_libeleParametres" layoutX="181.0" layoutY="35.0" text="Veuillez entrer les paramètres :">
+                        <Label fx:id="label_libeleParametres" layoutX="281.0" layoutY="35.0" text="Veuillez entrer les paramètres :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label fx:id="label_lambda" layoutX="253.0" layoutY="90.0" text="λ :">
+                        <Label fx:id="label_lambda" layoutX="100.0" layoutY="90.0" text="λ (Nombre moyen d'arrivées dans le système par unité de temps) :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <TextField fx:id="textField_lambda" layoutX="296.0" layoutY="84.0" prefHeight="31.0" prefWidth="47.0">
+                        <TextField fx:id="textField_lambda" layoutX="650.0" layoutY="84.0" prefHeight="31.0" prefWidth="47.0">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <Label fx:id="label_mu" layoutX="252.0" layoutY="142.0" text="μ :">
+                        <Label fx:id="label_mu" layoutX="100.0" layoutY="142.0" text="μ (Nombre moyen d'arrivées dans le système par unité de temps) :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <TextField fx:id="textField_mu" layoutX="296.0" layoutY="136.0" prefHeight="31.0" prefWidth="47.0">
+                        <TextField fx:id="textField_mu" layoutX="650.0" layoutY="136.0" prefHeight="31.0" prefWidth="47.0">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <Label fx:id="label_K" layoutX="252.0" layoutY="189.0" text="K :">
+                        <Label fx:id="label_K" layoutX="100.0" layoutY="189.0" text="K (Nombre maximum de client dans la file d'attente) :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <TextField fx:id="textField_K" layoutX="296.0" layoutY="188.0" prefHeight="31.0" prefWidth="47.0">
+                        <TextField fx:id="textField_K" layoutX="650.0" layoutY="188.0" prefHeight="31.0" prefWidth="47.0">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <Label fx:id="label_S" layoutX="253.0" layoutY="247.0" text="S :">
+                        <Label fx:id="label_S" layoutX="100.0" layoutY="247.0" text="S (Nombre de serveurs dans la file d'attente) :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <TextField fx:id="textField_S" layoutX="296.0" layoutY="241.0" prefHeight="31.0" prefWidth="47.0">
+                        <TextField fx:id="textField_S" layoutX="650.0" layoutY="241.0" prefHeight="31.0" prefWidth="47.0">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <Button fx:id="bouton_validerParametres" layoutX="263.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleSubmitParametresAction" text="Valider">
+                        <Button fx:id="bouton_validerParametres" layoutX="363.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleSubmitParametresAction" text="Valider">
                            <font>
                               <Font size="18.0" />
                            </font></Button>
-                        <Label fx:id="label_choix" layoutX="269.0" layoutY="8.0" minHeight="16" minWidth="69">
+                        <Label fx:id="label_choix" layoutX="319.0" layoutY="8.0" minHeight="16" minWidth="69">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label fx:id="label_rhoIncorrect" layoutX="361.0" layoutY="322.0" text="ϱ doit être inférieur à 1 !" textFill="#ff3a3a" visible="false">
+                        <Label fx:id="label_rhoIncorrect" layoutX="461.0" layoutY="322.0" text="ϱ doit être inférieur à 1 !" textFill="#ff3a3a" visible="false">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Label>
@@ -100,62 +104,62 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="label_L" layoutX="45.0" layoutY="89.0" text="Nb moyen de clients ds le système L : ">
+                        <Label fx:id="label_L" layoutX="145.0" layoutY="89.0" text="Nb moyen de clients ds le système L : ">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label fx:id="label_Lq" layoutX="45.0" layoutY="123.0" text="Nb moyen de clients ds la file Lq : ">
+                        <Label fx:id="label_Lq" layoutX="145.0" layoutY="123.0" text="Nb moyen de clients ds la file Lq : ">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label fx:id="label_W" layoutX="45.0" layoutY="161.0" text="Durée moyenne d'attente ds le système W : ">
+                        <Label fx:id="label_W" layoutX="145.0" layoutY="161.0" text="Durée moyenne d'attente ds le système W : ">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label fx:id="label_Wq" layoutX="45.0" layoutY="196.0" text="Durée moyenne d'attente ds la file Wq : ">
+                        <Label fx:id="label_Wq" layoutX="145.0" layoutY="196.0" text="Durée moyenne d'attente ds la file Wq : ">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label fx:id="label_tempsSejour" layoutX="45.0" layoutY="252.0" text="Temps de séjour ds le système P(T&gt;t) =">
+                        <Label fx:id="label_tempsSejour" layoutX="145.0" layoutY="252.0" text="Temps de séjour ds le système P(T&gt;t) =">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label layoutX="129.0" layoutY="334.0" text="Où t = ">
+                        <Label layoutX="229.0" layoutY="334.0" text="Où t = ">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <TextField fx:id="textField_t" layoutX="189.0" layoutY="328.0" prefHeight="39.0" prefWidth="58.0">
+                        <TextField fx:id="textField_t" layoutX="289.0" layoutY="328.0" prefHeight="39.0" prefWidth="58.0">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <Button fx:id="bouton_validert" layoutX="264.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleValidertAction" text="Valider">
+                        <Button fx:id="bouton_validert" layoutX="364.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleValidertAction" text="Valider">
                            <font>
                               <Font size="18.0" />
                            </font></Button>
-                        <Label fx:id="label_tempsFile" layoutX="45.0" layoutY="286.0" text="Temps de séjour ds la file P(Tq&gt;t) =">
+                        <Label fx:id="label_tempsFile" layoutX="145.0" layoutY="286.0" text="Temps de séjour ds la file P(Tq&gt;t) =">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label fx:id="label_ResumeFile" layoutX="205.0" layoutY="31.0" text="File">
+                        <Label fx:id="label_ResumeFile" layoutX="305.0" layoutY="31.0" text="File">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Label>
-                        <Label fx:id="label_Qi" layoutX="45.0" layoutY="390.0" text="Qi = ">
+                        <Label fx:id="label_Qi" layoutX="145.0" layoutY="390.0" text="Qi (Probabilité d'avoir i client(s) dans le système) = ">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label  layoutX="129.0" layoutY="427.0" text="Où i = ">
+                        <Label  layoutX="229.0" layoutY="427.0" text="Où i = ">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="textField_i" layoutX="188.0" layoutY="421.0" prefHeight="31.0" prefWidth="61.0">
+                        <TextField fx:id="textField_i" layoutX="288.0" layoutY="421.0" prefHeight="31.0" prefWidth="61.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="bouton_valideri" layoutX="264.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleValideriAction" text="Valider">
+                        <Button fx:id="bouton_valideri" layoutX="364.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleValideriAction" text="Valider">
                            <font>
                               <Font size="18.0" />
                            </font>

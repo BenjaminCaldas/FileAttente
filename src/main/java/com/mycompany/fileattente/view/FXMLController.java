@@ -174,27 +174,34 @@ public class FXMLController implements Initializable {
             if ("M|M|1".equals(choix)) {
                 label_ResumeFile.setText("File M|M|1 (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
                 fileMM1 = new MM1(Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
-                label_L.setText("Nb moyen de clients ds le système L : " + df2.format(fileMM1.calculateL()));
-                label_Lq.setText("Nb moyen de clients ds la file Lq : " + df2.format(fileMM1.calculateLq()));
-                label_W.setText("Durée moyenne d'attente ds le système W : " + df2.format(fileMM1.calculateW()));
-                label_Wq.setText("Durée moyenne d'attente ds la file Wq : " + df2.format(fileMM1.calculateWq()));
+                label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMM1.calculateL()));
+                label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMM1.calculateLq()));
+                label_W.setText("Durée moyenne d'attente dans le système W : " + df2.format(fileMM1.calculateW()));
+                label_Wq.setText("Durée moyenne d'attente dans la file Wq : " + df2.format(fileMM1.calculateWq()));
+                label_tempsFile.setVisible(true);
+                label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
+                label_tempsFile.setText("Temps de séjour dans la file P(Tq>t) :");
             }
             if ("M|M|1|K".equals(choix)) {
                 label_ResumeFile.setText("File M|M|1|" + textField_K.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
                 fileMM1K = new MM1K(Integer.valueOf(textField_K.getText()), Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
-                label_L.setText("Nb moyen de clients ds le système L : " + df2.format(fileMM1K.calculateL()));
-                label_Lq.setText("Nb moyen de clients ds la file Lq : " + df2.format(fileMM1K.calculateLq()));
-                label_W.setText("Durée moyenne d'attente ds le système W : " + df2.format(fileMM1K.calculateW()));
-                label_Wq.setText("Durée moyenne d'attente ds la file Wq : " + df2.format(fileMM1K.calculateWq()));
+                label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMM1K.calculateL()));
+                label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMM1K.calculateLq()));
+                label_W.setText("La durée moyenne d'attente dans le système W est indisponible");
+                label_Wq.setText("La durée moyenne d'attente dans la file Wq est indisponible");
                 label_tempsFile.setVisible(false);
+                label_tempsSejour.setText("Temps de séjour ds le système P(T>t) :");
             }
             if ("M|M|S".equals(choix)) {
                 label_ResumeFile.setText("File M|M|" + textField_S.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
                 fileMMS = new MMS(Integer.valueOf(textField_S.getText()), Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
-                label_L.setText("Nb moyen de clients ds le système L : " + df2.format(fileMMS.calculateL()));
-                label_Lq.setText("Nb moyen de clients ds la file Lq : " + df2.format(fileMMS.calculateLq()));
-                label_W.setText("Durée moyenne d'attente ds le système W : " + df2.format(fileMMS.calculateW()));
-                label_Wq.setText("Durée moyenne d'attente ds la file Wq : " + df2.format(fileMMS.calculateWq()));
+                label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMMS.calculateL()));
+                label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMMS.calculateLq()));
+                label_W.setText("Durée moyenne d'attente dans le système W : " + df2.format(fileMMS.calculateW()));
+                label_Wq.setText("Durée moyenne d'attente dans la file Wq : " + df2.format(fileMMS.calculateWq()));
+                label_tempsFile.setVisible(true);
+                label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
+                label_tempsFile.setText("Temps de séjour dans la file P(Tq>t) :");
             }
         }
     }
@@ -202,28 +209,33 @@ public class FXMLController implements Initializable {
     @FXML
     private void handleValidertAction(ActionEvent event) {
         if ("M|M|1".equals(choix)) {
-            label_tempsSejour.setText("Temps de séjour ds le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
-            label_tempsFile.setText("Temps de séjour ds la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
+            label_tempsSejour.setVisible(true);
+            label_tempsFile.setVisible(true);
+            label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+            label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
         }
         if ("M|M|1|K".equals(choix)) {
-            label_tempsSejour.setText("Temps de séjour ds le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1K.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+            label_tempsSejour.setVisible(true);
+            label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1K.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
         }
         if ("M|M|S".equals(choix)) {
-            label_tempsSejour.setText("Temps de séjour ds le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
-            label_tempsFile.setText("Temps de séjour ds la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
+            label_tempsSejour.setVisible(true);
+            label_tempsFile.setVisible(true);
+            label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+            label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
         }
     }
     
     @FXML
     private void handleValideriAction(ActionEvent event) {
         if ("M|M|1".equals(choix)) {
-            label_Qi.setText("Q" + textField_i.getText() + " = " + df4.format(fileMM1.calculateQj(Integer.valueOf(textField_i.getText()))));
+            label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1.calculateQj(Integer.valueOf(textField_i.getText()))));
         }
         if ("M|M|1|K".equals(choix)) {
-            label_Qi.setText("Q" + textField_i.getText() + " = " + df4.format(fileMM1K.calculateQj(Integer.valueOf(textField_i.getText()))));
+            label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1K.calculateQj(Integer.valueOf(textField_i.getText()))));
         }
         if ("M|M|S".equals(choix)) {
-            label_Qi.setText("Q" + textField_i.getText() + " = " + df4.format(fileMMS.calculateQj(Integer.valueOf(textField_i.getText()))));
+            label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMMS.calculateQj(Integer.valueOf(textField_i.getText()))));
         }
     }
     
