@@ -61,7 +61,7 @@
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <Label fx:id="label_mu" layoutX="100.0" layoutY="142.0" text="μ (Nombre moyen d'arrivées dans le système par unité de temps) :">
+                        <Label fx:id="label_mu" layoutX="100.0" layoutY="142.0" text="μ (Nombre moyen de services dans le système par unité de temps) :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
@@ -93,7 +93,7 @@
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Label fx:id="label_rhoIncorrect" layoutX="461.0" layoutY="322.0" text="ϱ doit être inférieur à 1 !" textFill="#ff3a3a" visible="false">
+                        <Label fx:id="label_rhoIncorrect" layoutX="100.0" layoutY="380.0" text="ϱ doit être inférieur à 1 !" textFill="#ff3a3a" visible="false">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Label>
@@ -136,6 +136,10 @@
                            <font>
                               <Font size="18.0" />
                            </font></Button>
+                        <Label fx:id="label_tIncorrect" layoutX="464.0" layoutY="328.0" text="t incorrect" textFill="#ff3a3a" visible="false">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
                         <Label fx:id="label_tempsFile" layoutX="145.0" layoutY="286.0" text="Temps de séjour ds la file P(Tq&gt;t) =">
                            <font>
                               <Font size="18.0" />
@@ -164,6 +168,10 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
+                        <Label fx:id="label_iIncorrect" layoutX="464.0" layoutY="421.0" text="i incorrect" textFill="#ff3a3a" visible="false">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
                      </children></AnchorPane>
               </content>
             </Tab>

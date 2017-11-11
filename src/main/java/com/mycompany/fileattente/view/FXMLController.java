@@ -57,8 +57,10 @@ public class FXMLController implements Initializable {
     @FXML private Label label_tempsSejour;
     @FXML private Label label_tempsFile;
     @FXML private TextField textField_t;
+    @FXML private Label label_tIncorrect;
     @FXML private Label label_Qi;
     @FXML private TextField textField_i;
+    @FXML private Label label_iIncorrect;
     
     @FXML
     private void handleChoice1Action(ActionEvent event) {
@@ -159,83 +161,136 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void handleSubmitParametresAction(ActionEvent event) {
-        double rho;
-        if (!"M|M|S".equals(choix)) {
-            rho = Double.valueOf(textField_lambda.getText()) / Double.valueOf(textField_mu.getText());
-        } else {
-            rho = Double.valueOf(textField_lambda.getText()) / (Double.valueOf(textField_mu.getText()) * Integer.valueOf(textField_S.getText()));
-        }
-        if (("M|M|1|K".equals(choix) && rho > 1) || (!"M|M|1|K".equals(choix) && rho >= 1)) {
+
+        boolean valueError = false;
+
+        if(textField_lambda.getText().isEmpty() || Double.valueOf(textField_lambda.getText())<=0){
+            valueError = true;
             label_rhoIncorrect.setVisible(true);
-        } else {
-            label_rhoIncorrect.setVisible(false);
-            tab_resultats.setDisable(false);
-            tabPane_tabs.getSelectionModel().select(tab_resultats);
-            if ("M|M|1".equals(choix)) {
-                label_ResumeFile.setText("File M|M|1 (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
-                fileMM1 = new MM1(Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
-                label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMM1.calculateL()));
-                label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMM1.calculateLq()));
-                label_W.setText("Durée moyenne d'attente dans le système W : " + df2.format(fileMM1.calculateW()));
-                label_Wq.setText("Durée moyenne d'attente dans la file Wq : " + df2.format(fileMM1.calculateWq()));
-                label_tempsFile.setVisible(true);
-                label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
-                label_tempsFile.setText("Temps de séjour dans la file P(Tq>t) :");
+            label_rhoIncorrect.setText("Valeur de λ incorrecte");
+        }
+
+        if(textField_mu.getText().isEmpty() || Double.valueOf(textField_mu.getText())<=0){
+            valueError = true;
+            label_rhoIncorrect.setVisible(true);
+            label_rhoIncorrect.setText("Valeur de μ incorrecte");
+        }
+
+        if("M|M|S".equals(choix) && (textField_S.getText().isEmpty() || Double.valueOf(textField_S.getText())<1 )){
+            valueError = true;
+            label_rhoIncorrect.setVisible(true);
+            label_rhoIncorrect.setText("Valeur de S incorrecte");
+        }
+
+        if("M|M|1|K".equals(choix) && (textField_K.getText().isEmpty() || Double.valueOf(textField_K.getText())<1)){
+            valueError = true;
+            label_rhoIncorrect.setVisible(true);
+            label_rhoIncorrect.setText("Valeur de K incorrecte");
+        }
+
+        if (valueError == false){
+            double rho;
+            if (!"M|M|S".equals(choix)) {
+                rho = Double.valueOf(textField_lambda.getText()) / Double.valueOf(textField_mu.getText());
+            } else {
+                rho = Double.valueOf(textField_lambda.getText()) / (Double.valueOf(textField_mu.getText()) * Integer.valueOf(textField_S.getText()));
             }
-            if ("M|M|1|K".equals(choix)) {
-                label_ResumeFile.setText("File M|M|1|" + textField_K.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
-                fileMM1K = new MM1K(Integer.valueOf(textField_K.getText()), Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
-                label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMM1K.calculateL()));
-                label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMM1K.calculateLq()));
-                label_W.setText("La durée moyenne d'attente dans le système W est indisponible");
-                label_Wq.setText("La durée moyenne d'attente dans la file Wq est indisponible");
-                label_tempsFile.setVisible(false);
-                label_tempsSejour.setText("Temps de séjour ds le système P(T>t) :");
-            }
-            if ("M|M|S".equals(choix)) {
-                label_ResumeFile.setText("File M|M|" + textField_S.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
-                fileMMS = new MMS(Integer.valueOf(textField_S.getText()), Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
-                label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMMS.calculateL()));
-                label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMMS.calculateLq()));
-                label_W.setText("Durée moyenne d'attente dans le système W : " + df2.format(fileMMS.calculateW()));
-                label_Wq.setText("Durée moyenne d'attente dans la file Wq : " + df2.format(fileMMS.calculateWq()));
-                label_tempsFile.setVisible(true);
-                label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
-                label_tempsFile.setText("Temps de séjour dans la file P(Tq>t) :");
+            if (("M|M|1|K".equals(choix) && rho > 1) || (!"M|M|1|K".equals(choix) && rho >= 1)) {
+                label_rhoIncorrect.setVisible(true);
+                if ("M|M|1".equals(choix) && rho >= 1){
+                    label_rhoIncorrect.setText("Cas M|M|1 : ϱ doit être inférieur à 1 ! \nVeuiller vous assurer que λ soit inférieur à μ.");
+                }
+                if ("M|M|S".equals(choix) && rho >= 1){
+                    label_rhoIncorrect.setText("Cas M|M|S : ϱ doit être inférieur à 1 ! \nVeuiller vous assurer que λ soit inférieur à S x μ.");
+                }
+                if ("M|M|1|K".equals(choix) && rho >= 1){
+                    label_rhoIncorrect.setText("Cas M|M|1|K : ϱ doit être inférieur ou égal à 1 ! \nVeuiller vous assurer que λ soit inférieur ou égal à μ.");
+                }
+            } else {
+                label_rhoIncorrect.setVisible(false);
+                tab_resultats.setDisable(false);
+                tabPane_tabs.getSelectionModel().select(tab_resultats);
+                if ("M|M|1".equals(choix)) {
+                    label_ResumeFile.setText("File M|M|1 (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
+                    fileMM1 = new MM1(Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
+                    label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMM1.calculateL()));
+                    label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMM1.calculateLq()));
+                    label_W.setText("Durée moyenne d'attente dans le système W : " + df2.format(fileMM1.calculateW()));
+                    label_Wq.setText("Durée moyenne d'attente dans la file Wq : " + df2.format(fileMM1.calculateWq()));
+                    label_tempsFile.setVisible(true);
+                    label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
+                    label_tempsFile.setText("Temps de séjour dans la file P(Tq>t) :");
+                }
+                if ("M|M|1|K".equals(choix)) {
+                    label_ResumeFile.setText("File M|M|1|" + textField_K.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
+                    fileMM1K = new MM1K(Integer.valueOf(textField_K.getText()), Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
+                    label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMM1K.calculateL()));
+                    label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMM1K.calculateLq()));
+                    label_W.setText("La durée moyenne d'attente dans le système W est indisponible");
+                    label_Wq.setText("La durée moyenne d'attente dans la file Wq est indisponible");
+                    label_tempsFile.setVisible(false);
+                    label_tempsSejour.setText("Temps de séjour ds le système P(T>t) :");
+                }
+                if ("M|M|S".equals(choix)) {
+                    label_ResumeFile.setText("File M|M|" + textField_S.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
+                    fileMMS = new MMS(Integer.valueOf(textField_S.getText()), Double.valueOf(textField_lambda.getText()), Double.valueOf(textField_mu.getText()));
+                    label_L.setText("Nombre moyen de clients dans le système L : " + df2.format(fileMMS.calculateL()));
+                    label_Lq.setText("Nombre moyen de clients dans la file Lq : " + df2.format(fileMMS.calculateLq()));
+                    label_W.setText("Durée moyenne d'attente dans le système W : " + df2.format(fileMMS.calculateW()));
+                    label_Wq.setText("Durée moyenne d'attente dans la file Wq : " + df2.format(fileMMS.calculateWq()));
+                    label_tempsFile.setVisible(true);
+                    label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
+                    label_tempsFile.setText("Temps de séjour dans la file P(Tq>t) :");
+                }
             }
         }
+
     }
     
     @FXML
     private void handleValidertAction(ActionEvent event) {
-        if ("M|M|1".equals(choix)) {
-            label_tempsSejour.setVisible(true);
-            label_tempsFile.setVisible(true);
-            label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
-            label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
+        if(textField_t.getText().isEmpty() || Double.valueOf(textField_t.getText())<0){
+            label_tIncorrect.setVisible(true);
+            label_tIncorrect.setText("Valeur de t incorrecte");
         }
-        if ("M|M|1|K".equals(choix)) {
-            label_tempsSejour.setVisible(true);
-            label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1K.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
-        }
-        if ("M|M|S".equals(choix)) {
-            label_tempsSejour.setVisible(true);
-            label_tempsFile.setVisible(true);
-            label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
-            label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
+        else {
+            label_tIncorrect.setVisible(false);
+            if ("M|M|1".equals(choix)) {
+                label_tempsSejour.setVisible(true);
+                label_tempsFile.setVisible(true);
+                label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+                label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
+            }
+            if ("M|M|1|K".equals(choix)) {
+                label_tempsSejour.setVisible(true);
+                label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1K.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+            }
+            if ("M|M|S".equals(choix)) {
+                label_tempsSejour.setVisible(true);
+                label_tempsFile.setVisible(true);
+                label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+                label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
+            }
         }
     }
     
     @FXML
     private void handleValideriAction(ActionEvent event) {
-        if ("M|M|1".equals(choix)) {
-            label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1.calculateQj(Integer.valueOf(textField_i.getText()))));
+        if(textField_i.getText().isEmpty() || Double.valueOf(textField_i.getText())<0){
+            label_iIncorrect.setVisible(true);
+            label_iIncorrect.setText("Valeur de i incorrecte");
         }
-        if ("M|M|1|K".equals(choix)) {
-            label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1K.calculateQj(Integer.valueOf(textField_i.getText()))));
-        }
-        if ("M|M|S".equals(choix)) {
-            label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMMS.calculateQj(Integer.valueOf(textField_i.getText()))));
+        else {
+            label_iIncorrect.setVisible(false);
+            if ("M|M|1".equals(choix)) {
+                label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1.calculateQj(Integer.valueOf(textField_i.getText()))));
+            }
+            if ("M|M|1|K".equals(choix)) {
+                label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1K.calculateQj(Integer.valueOf(textField_i.getText()))));
+            }
+            if ("M|M|S".equals(choix)) {
+                label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMMS.calculateQj(Integer.valueOf(textField_i.getText()))));
+            }
         }
     }
     
