@@ -229,7 +229,7 @@ public class FXMLController implements Initializable {
                     label_W.setText("La durée moyenne d'attente dans le système W est indisponible");
                     label_Wq.setText("La durée moyenne d'attente dans la file Wq est indisponible");
                     label_tempsFile.setVisible(false);
-                    label_tempsSejour.setText("Temps de séjour ds le système P(T>t) :");
+                    label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
                 }
                 if ("M|M|S".equals(choix)) {
                     label_ResumeFile.setText("File M|M|" + textField_S.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
