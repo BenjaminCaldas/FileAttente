@@ -164,29 +164,57 @@ public class FXMLController implements Initializable {
 
         boolean valueError = false;
 
-        if(textField_lambda.getText().isEmpty() || Double.valueOf(textField_lambda.getText())<=0){
+        try {
+            if (textField_lambda.getText().isEmpty() || Double.valueOf(textField_lambda.getText()) <= 0) {
+                valueError = true;
+                label_rhoIncorrect.setVisible(true);
+                label_rhoIncorrect.setText("Valeur de λ incorrecte");
+            }
+        }
+        catch(NumberFormatException e){
             valueError = true;
             label_rhoIncorrect.setVisible(true);
-            label_rhoIncorrect.setText("Valeur de λ incorrecte");
+            label_rhoIncorrect.setText("Format de λ incorrect");
         }
 
-        if(textField_mu.getText().isEmpty() || Double.valueOf(textField_mu.getText())<=0){
+        try {
+            if (textField_mu.getText().isEmpty() || Double.valueOf(textField_mu.getText()) <= 0) {
+                valueError = true;
+                label_rhoIncorrect.setVisible(true);
+                label_rhoIncorrect.setText("Valeur de μ incorrecte");
+            }
+        }
+        catch(NumberFormatException e){
             valueError = true;
             label_rhoIncorrect.setVisible(true);
-            label_rhoIncorrect.setText("Valeur de μ incorrecte");
+            label_rhoIncorrect.setText("Format de μ incorrect");
         }
 
-        if("M|M|S".equals(choix) && (textField_S.getText().isEmpty() || Double.valueOf(textField_S.getText())<1 )){
+        try {
+            if ("M|M|S".equals(choix) && (textField_S.getText().isEmpty() || Double.valueOf(textField_S.getText()) < 1)) {
+                valueError = true;
+                label_rhoIncorrect.setVisible(true);
+                label_rhoIncorrect.setText("Valeur de S incorrecte");
+            }
+        }catch(NumberFormatException e){
             valueError = true;
             label_rhoIncorrect.setVisible(true);
-            label_rhoIncorrect.setText("Valeur de S incorrecte");
+            label_rhoIncorrect.setText("Format de S incorrect");
         }
 
-        if("M|M|1|K".equals(choix) && (textField_K.getText().isEmpty() || Double.valueOf(textField_K.getText())<1)){
+        try {
+            if ("M|M|1|K".equals(choix) && (textField_K.getText().isEmpty() || Double.valueOf(textField_K.getText()) < 1)) {
+                valueError = true;
+                label_rhoIncorrect.setVisible(true);
+                label_rhoIncorrect.setText("Valeur de K incorrecte");
+            }
+        }
+        catch(NumberFormatException e){
             valueError = true;
             label_rhoIncorrect.setVisible(true);
-            label_rhoIncorrect.setText("Valeur de K incorrecte");
+            label_rhoIncorrect.setText("Format de K incorrect");
         }
+
 
         if (valueError == false){
             double rho;
@@ -220,6 +248,8 @@ public class FXMLController implements Initializable {
                     label_tempsFile.setVisible(true);
                     label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
                     label_tempsFile.setText("Temps de séjour dans la file P(Tq>t) :");
+                    label_tIncorrect.setVisible(false);
+                    label_iIncorrect.setVisible(false);
                 }
                 if ("M|M|1|K".equals(choix)) {
                     label_ResumeFile.setText("File M|M|1|" + textField_K.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
@@ -230,6 +260,8 @@ public class FXMLController implements Initializable {
                     label_Wq.setText("La durée moyenne d'attente dans la file Wq est indisponible");
                     label_tempsFile.setVisible(false);
                     label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
+                    label_tIncorrect.setVisible(false);
+                    label_iIncorrect.setVisible(false);
                 }
                 if ("M|M|S".equals(choix)) {
                     label_ResumeFile.setText("File M|M|" + textField_S.getText() + " (λ=" + textField_lambda.getText() + ", μ=" + textField_mu.getText() + ", ϱ=" + df2.format(rho) + ")");
@@ -241,6 +273,8 @@ public class FXMLController implements Initializable {
                     label_tempsFile.setVisible(true);
                     label_tempsSejour.setText("Temps de séjour dans le système P(T>t) :");
                     label_tempsFile.setText("Temps de séjour dans la file P(Tq>t) :");
+                    label_tIncorrect.setVisible(false);
+                    label_iIncorrect.setVisible(false);
                 }
             }
         }
@@ -249,49 +283,70 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void handleValidertAction(ActionEvent event) {
-        if(textField_t.getText().isEmpty() || Double.valueOf(textField_t.getText())<0){
+        try{
+            if(textField_t.getText().isEmpty() || Double.valueOf(textField_t.getText())<0){
+                label_tIncorrect.setVisible(true);
+                label_tIncorrect.setText("Valeur de t incorrecte");
+            }
+            else {
+                label_tIncorrect.setVisible(false);
+                if ("M|M|1".equals(choix)) {
+                    label_tempsSejour.setVisible(true);
+                    label_tempsFile.setVisible(true);
+                    label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+                    label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
+                }
+                if ("M|M|1|K".equals(choix)) {
+                    label_tempsSejour.setVisible(true);
+                    label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1K.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+                }
+                if ("M|M|S".equals(choix)) {
+                    if((fileMMS.getS()-1-fileMMS.rho()*fileMMS.getS())==0){
+                        label_tIncorrect.setVisible(true);
+                        label_tIncorrect.setText("Incalculable, \ndivision par 0 pour P(T>t)");
+                    }
+                    else{
+                        label_tempsSejour.setVisible(true);
+                        label_tempsFile.setVisible(true);
+                        label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
+                        label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
+                    }
+                }
+            }
+        }
+        catch(NumberFormatException e){
             label_tIncorrect.setVisible(true);
-            label_tIncorrect.setText("Valeur de t incorrecte");
+            label_tIncorrect.setText("Format de t incorrecte");
         }
-        else {
-            label_tIncorrect.setVisible(false);
-            if ("M|M|1".equals(choix)) {
-                label_tempsSejour.setVisible(true);
-                label_tempsFile.setVisible(true);
-                label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
-                label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMM1.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
-            }
-            if ("M|M|1|K".equals(choix)) {
-                label_tempsSejour.setVisible(true);
-                label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMM1K.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
-            }
-            if ("M|M|S".equals(choix)) {
-                label_tempsSejour.setVisible(true);
-                label_tempsFile.setVisible(true);
-                label_tempsSejour.setText("Temps de séjour dans le système P(T>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauSupT(Double.valueOf(textField_t.getText()))));
-                label_tempsFile.setText("Temps de séjour dans la file P(Tq>" + textField_t.getText() + ") = " + df4.format(fileMMS.calculateProbaTauQSupT(Double.valueOf(textField_t.getText()))));
-            }
-        }
+
+
     }
     
     @FXML
     private void handleValideriAction(ActionEvent event) {
-        if(textField_i.getText().isEmpty() || Double.valueOf(textField_i.getText())<0){
-            label_iIncorrect.setVisible(true);
-            label_iIncorrect.setText("Valeur de i incorrecte");
+        try{
+            if(textField_i.getText().isEmpty() || Double.valueOf(textField_i.getText())<0){
+                label_iIncorrect.setVisible(true);
+                label_iIncorrect.setText("Valeur de i incorrecte");
+            }
+            else {
+                label_iIncorrect.setVisible(false);
+                if ("M|M|1".equals(choix)) {
+                    label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1.calculateQj(Integer.valueOf(textField_i.getText()))));
+                }
+                if ("M|M|1|K".equals(choix)) {
+                    label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1K.calculateQj(Integer.valueOf(textField_i.getText()))));
+                }
+                if ("M|M|S".equals(choix)) {
+                    label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMMS.calculateQj(Integer.valueOf(textField_i.getText()))));
+                }
+            }
         }
-        else {
-            label_iIncorrect.setVisible(false);
-            if ("M|M|1".equals(choix)) {
-                label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1.calculateQj(Integer.valueOf(textField_i.getText()))));
-            }
-            if ("M|M|1|K".equals(choix)) {
-                label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1K.calculateQj(Integer.valueOf(textField_i.getText()))));
-            }
-            if ("M|M|S".equals(choix)) {
-                label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMMS.calculateQj(Integer.valueOf(textField_i.getText()))));
-            }
+        catch(NumberFormatException e){
+            label_tIncorrect.setVisible(true);
+            label_tIncorrect.setText("Format de i incorrecte");
         }
+
     }
     
     @Override
