@@ -349,8 +349,8 @@ public class FXMLController implements Initializable {
             }
         }
         catch(NumberFormatException e){
-            label_tIncorrect.setVisible(true);
-            label_tIncorrect.setText("Format de i incorrecte");
+            label_iIncorrect.setVisible(true);
+            label_iIncorrect.setText("Format de i incorrect");
         }
 
     }
