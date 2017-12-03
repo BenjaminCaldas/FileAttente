@@ -335,7 +335,13 @@ public class FXMLController implements Initializable {
                     label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1.calculateQj(Integer.valueOf(textField_i.getText()))));
                 }
                 if ("M|M|1|K".equals(choix)) {
-                    label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1K.calculateQj(Integer.valueOf(textField_i.getText()))));
+                    if(Integer.valueOf(textField_i.getText()) > fileMM1K.getK()){
+                        label_iIncorrect.setVisible(true);
+                        label_iIncorrect.setText("Il ne peut pas y avoir plus de \n"+fileMM1K.getK()+" client(s) dans le système");
+                    }
+                    else{
+                        label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMM1K.calculateQj(Integer.valueOf(textField_i.getText()))));
+                    }
                 }
                 if ("M|M|S".equals(choix)) {
                     label_Qi.setText("Q" + textField_i.getText() + " (Probabilité d'avoir " + textField_i.getText() + " client(s) dans le système) = " + df4.format(fileMMS.calculateQj(Integer.valueOf(textField_i.getText()))));

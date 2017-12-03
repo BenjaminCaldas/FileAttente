@@ -69,7 +69,7 @@
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <Label fx:id="label_K" layoutX="100.0" layoutY="189.0" text="K (Nombre maximum de client dans la file d'attente) :">
+                        <Label fx:id="label_K" layoutX="100.0" layoutY="189.0" text="K (Nombre maximum de client dans le système) :">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
