@@ -226,13 +226,13 @@ public class FXMLController implements Initializable {
             if (("M|M|1|K".equals(choix) && rho > 1) || (!"M|M|1|K".equals(choix) && rho >= 1)) {
                 label_rhoIncorrect.setVisible(true);
                 if ("M|M|1".equals(choix) && rho >= 1){
-                    label_rhoIncorrect.setText("Cas M|M|1 : ϱ doit être inférieur à 1 ! \nVeuiller vous assurer que λ soit inférieur à μ.");
+                    label_rhoIncorrect.setText("Cas M|M|1 : ϱ doit être inférieur à 1 ! \nVeuillez vous assurer que λ soit inférieur à μ.");
                 }
                 if ("M|M|S".equals(choix) && rho >= 1){
-                    label_rhoIncorrect.setText("Cas M|M|S : ϱ doit être inférieur à 1 ! \nVeuiller vous assurer que λ soit inférieur à S x μ.");
+                    label_rhoIncorrect.setText("Cas M|M|S : ϱ doit être inférieur à 1 ! \nVeuillez vous assurer que λ soit inférieur à S x μ.");
                 }
                 if ("M|M|1|K".equals(choix) && rho >= 1){
-                    label_rhoIncorrect.setText("Cas M|M|1|K : ϱ doit être inférieur ou égal à 1 ! \nVeuiller vous assurer que λ soit inférieur ou égal à μ.");
+                    label_rhoIncorrect.setText("Cas M|M|1|K : ϱ doit être inférieur ou égal à 1 ! \nVeuillez vous assurer que λ soit inférieur ou égal à μ.");
                 }
             } else {
                 label_rhoIncorrect.setVisible(false);
@@ -316,7 +316,7 @@ public class FXMLController implements Initializable {
         }
         catch(NumberFormatException e){
             label_tIncorrect.setVisible(true);
-            label_tIncorrect.setText("Format de t incorrecte");
+            label_tIncorrect.setText("Format de t incorrect");
         }
 
 
@@ -327,7 +327,7 @@ public class FXMLController implements Initializable {
         try{
             if(textField_i.getText().isEmpty() || Double.valueOf(textField_i.getText())<0){
                 label_iIncorrect.setVisible(true);
-                label_iIncorrect.setText("Valeur de i incorrecte");
+                label_iIncorrect.setText("Valeur de i incorrect");
             }
             else {
                 label_iIncorrect.setVisible(false);
